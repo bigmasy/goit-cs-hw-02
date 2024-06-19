@@ -7,11 +7,11 @@ while IFS= read -r line
 do
     if [[ -n "$line" ]]; then
         status=$(curl -s -L --head --request GET "$line" | grep "HTTP/2 200")
-        if [[ -n "$status" ]]; then
+        if [[ "$status" == "HTTP/2 200" ]]; then
             echo "<$line> is UP" >> "$log"
         else
             echo "<$line> is Down" >> "$log"
-        fi
+fi
     fi
 done < "$filename"
 echo "Результати записано у файл логів: $log"
